@@ -1,0 +1,17 @@
+{{ template "base" .}} {{ define "meta-data" }}
+<title>Choose Room | Indra</title>
+{{ end }} {{ define "content"}}
+<div class="container">
+  <div class="row pt-3">
+    <div class="col">
+      <h1>Choose Room</h1>
+      {{ $rooms := index .Data "rooms"}}
+      <ul>
+        {{range $rooms}}
+        <li><a href="/choose-room/{{.ID}}">{{.RoomName}}</a></li>
+        {{end}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{ end }}

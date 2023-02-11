@@ -1,0 +1,96 @@
+{{ template "base" .}} {{ define "meta-data"}}
+<title>Home Page | Indra</title>
+<style>
+  .carousel-item {
+    height: 100vh;
+  }
+</style>
+{{ end }} {{ define "content" }}
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img
+        src="/static/images/outside.png"
+        class="d-block w-100"
+        alt="outside"
+      />
+    </div>
+    <div class="carousel-item">
+      <img src="/static/images/tray.png" class="d-block w-100" alt="tray" />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="/static/images/woman-laptop.png"
+        class="d-block w-100"
+        alt="woman-laptop"
+      />
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+      <h1 class="text-center">Welcome to Indra's Bed and Breakfast</h1>
+      <p>
+        Your home far away from Home, set on the majestic waters of the Atlantic
+        Ocean, this will be a vacation to remember. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Exercitationem nisi corporis inventore
+        vero ex blanditiis quasi harum! Cum natus corrupti, vel neque eaque,
+        possimus molestias iusto, laboriosam sunt assumenda nisi. Nam suscipit,
+        tenetur labore quis voluptatibus obcaecati praesentium laudantium
+        provident. Perferendis odio ad fugiat officia ab corrupti eos, magnam
+        vero hic incidunt, doloribus blanditiis, pariatur voluptatum quam
+        explicabo sit fugit? Magnam est optio dolor omnis illo quae consequatur
+        doloremque deserunt dolorum odio! Veniam nisi ullam quo hic nulla, nam
+        architecto atque expedita illum officiis quaerat. Molestiae corrupti
+        accusamus nobis quod.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a class="btn btn-success" href="/search-availability">Make Reservation</a>
+    </div>
+  </div>
+</div>
+{{ end }}

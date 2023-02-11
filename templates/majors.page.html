@@ -1,0 +1,128 @@
+{{ template "base" .}} {{ define "meta-data" }}
+<title>General's Rooms Page | Indra</title>
+{{ end }} {{ define "content"}}
+<div class="container pt-3 text-center">
+  <h1>Majors Suites Room</h1>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <img src="/static/images/marjors-suite.png" class="img-fluid" />
+      <p class="mt-3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae accusamus
+        quod quibusdam autem amet doloremque consequatur laborum inventore quas
+        quis mollitia, at, explicabo consectetur aut, commodi fugit delectus
+        magnam aliquam?
+      </p>
+      <button class="btn btn-success" id="make-reservation-btn-ms">
+        Make Reservation
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const msg = `
+  <form id="check-availbility-form" method="get" novalidate class="needs-validation container">
+    <div class="row">
+        <div class="col">
+        <div class="row" id="reservation-date-modal">
+            <div class="col">
+            <input
+                required
+                disabled
+                id="start"
+                class="form-control"
+                type="text"
+                name="start"
+                placeholder="Arrival Date"
+                autocomplete="off"
+            />
+            </div>
+            <div class="col">
+            <input
+                required
+                disabled
+                id="end"
+                class="form-control"
+                type="text"
+                name="end"
+                placeholder="Departure Date"
+                autocomplete="off"
+            />
+            </div>
+        </div>
+        </div>
+    </div>
+    </form>
+  `;
+
+  document
+    .getElementById("make-reservation-btn-ms")
+    .addEventListener("click", async () => {
+      const { value: result } = await Swal.fire({
+        title: "Search for Availbility",
+        html: msg,
+        focusConfirm: true,
+        showCancelButton: true,
+        willOpen: () => {
+          const elem = document.getElementById("reservation-date-modal");
+          const rangepicker = new DateRangePicker(elem, {
+            format: "yyyy-mm-dd",
+            minDate: new Date(),
+          });
+        },
+        didOpen: () => {
+          document.getElementById("start").removeAttribute("disabled");
+          document.getElementById("end").removeAttribute("disabled");
+        },
+        preConfirm: () => {
+          return [
+            document.getElementById("start").value,
+            document.getElementById("end").value,
+          ];
+        },
+      });
+
+      if (result) {
+        if (result.dismiss != Swal.DismissReason.cancel) {
+          if (result.value != "") {
+            let form = document.getElementById("check-availbility-form");
+            let formData = new FormData(form);
+            formData.append("csrf_token", "{{.CSRFToken}}");
+            formData.append("room-id", "2");
+            formData.append("start-date", result[0]);
+            formData.append("end-date", result[1]);
+
+            console.log("start-date", result[0]);
+            console.log("end-date", result[1]);
+
+            fetch("/search-availability-json", {
+              method: "post",
+              body: formData,
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+                if (data.ok) {
+                  modals(
+                    "Success",
+                    data.message,
+                    "success",
+                    "Book Now",
+                    true,
+                    () => {
+                      window.location.href =
+                        "/book-room?id=2&sd=" + result[0] + "&ed=" + result[1];
+                    }
+                  );
+                } else {
+                  modals("Error", data.message, "error", "Ok", false, () => {});
+                }
+              });
+          }
+        }
+      }
+    });
+</script>
+{{ end }}

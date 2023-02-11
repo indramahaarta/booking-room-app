@@ -1,0 +1,37 @@
+{{ template "base" .}} {{ define "meta-data" }}
+<title>Login Page | Indra</title>
+{{ end }} {{ define "content"}}
+<div class="container">
+  <div class="row pt-3">
+    <div class="col">
+      <h1>Login</h1>
+      <!-- form -->
+      <form method="post" action="/user/login" novalidate>
+        <!-- csrf token -->
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+        <!-- email -->
+        <div class="form-group mt-3">
+          <label for="email">Email</label>
+          {{with .Form.Errors.Get "email"}}
+          <label class="text-danger">{{.}}</label>
+          {{end}} <input type="email" id="email" autocomplete="off"
+          class="form-control {{with .Form.Errors.Get "email"}}is-invalid
+          {{end}}" name="email" value="{{.StringMap.email}}" required/>
+        </div>
+        <!-- password -->
+        <div class="form-group mt-3">
+          <label for="password">Password</label>
+          {{with .Form.Errors.Get "password"}}
+          <label class="text-danger">{{.}}</label>
+          {{end}} <input type="password" id="password" autocomplete="off"
+          class="form-control {{with .Form.Errors.Get "password"}}is-invalid
+          {{end}}" name="password" value="{{.StringMap.password}}" required/>
+        </div>
+        <hr />
+        <!-- submit button -->
+        <input class="btn btn-primary" value="Submit" type="submit" />
+      </form>
+    </div>
+  </div>
+</div>
+{{ end }}

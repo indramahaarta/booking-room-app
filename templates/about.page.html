@@ -1,0 +1,22 @@
+{{ template "base" .}} {{ define "meta-data" }}
+<title>About Page | Indra</title>
+{{ end }} {{ define "content"}}
+<div class="container">
+  <div class="row pt-3">
+    <div class="col">
+      <h1>This is the About Page</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
+        distinctio accusamus obcaecati fugiat natus rem fuga illo, odio ipsam
+        explicabo impedit aliquid nesciunt earum. Quaerat sed iure consectetur
+        quo consequatur??
+      </p>
+      {{if ne (index .StringMap "remote_ip") ("") }}
+        <p>Ip addres: {{index .StringMap "remote_ip"}}</p>
+      {{else}}
+        <p>I don't know your IP address, please visit <a href="/">Home</a></p>
+      {{end}}
+    </div>
+  </div>
+</div>
+{{ end }}

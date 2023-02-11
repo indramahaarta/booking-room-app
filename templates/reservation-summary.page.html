@@ -1,0 +1,42 @@
+{{ template "base" .}} {{ define "meta-data" }}
+<title>Reservation Summary Page | Indra</title>
+{{ end }} {{ define "content"}}
+<div class="container">
+  <div class="row pt-3">
+    <div class="col">
+      <h1>Reservation Summary</h1>
+      <hr />
+      {{$res := index .Data "reservation"}}
+      <table class="table table-striped">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <td>{{$res.FirstName}} {{$res.LastName}}</td>
+          </tr>
+          <tr>
+            <td>Room Name:</td>
+            <td>{{$res.Room.RoomName}}</td>
+          </tr>
+          <tr>
+            <td>Arrival:</td>
+            <td>{{$res.StartDate}}</td>
+          </tr>
+          <tr>
+            <td>Departure:</td>
+            <td>{{$res.EndDate}}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>{{$res.Email}}</td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td>{{$res.Phone}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{{ end }}
